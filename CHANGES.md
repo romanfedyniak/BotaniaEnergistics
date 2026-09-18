@@ -23,3 +23,8 @@ All notable Botania Energistics changes are grouped by the version in which they
   a place mana can only be put. Botania does not say how much a block took, so the change in its mana is
   measured and the network gives exactly that; a mana distributor, which keeps nothing and passes mana on, is
   left alone because what it took cannot be measured. An interface slot holds a pool's worth.
+- **Mana storage components, 1k to 16384k, are made on a runic altar.** Mana cells will be built around these
+  and not around AE2UD's own components, so the materials of Botania matter to them. Each tier takes three of
+  the tier below, an AE2 processor and the material of its stage of Botania: manasteel and mana powder, mana
+  pearls, mana diamonds, elementium and pixie dust, dragonstone, terrasteel, Gaia spirit and Gaia spirit
+  ingots, for 10,000 to 1,000,000 mana. The tiers from 256k follow AE2UD's switch for its own large cells.

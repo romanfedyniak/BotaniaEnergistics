@@ -1,2 +1,11 @@
+itemGroup.botaeng=Botania Energistics
 botaeng.mana=Мана
 botaeng.mana.pools=басейнів: %s
+item.botaeng.mana_component_1k.name=§61к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_4k.name=§e4к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_16k.name=§a16к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_64k.name=§b64к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_256k.name=§b256к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_1024k.name=§b1024к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_4096k.name=§b4096к§r МЕ компонент зберігання мани
+item.botaeng.mana_component_16384k.name=§b16384к§r МЕ компонент зберігання мани

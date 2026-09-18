@@ -1,5 +1,6 @@
 package com.botaeng.proxy;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -13,6 +14,8 @@ import appeng.api.behaviors.StackExportStrategy;
 import appeng.api.behaviors.StackImportStrategy;
 import appeng.api.stacks.AEKeyType;
 
+import com.botaeng.BotaEngItems;
+import com.botaeng.BotaEngRecipes;
 import com.botaeng.me.ManaKeyType;
 import com.botaeng.me.strategy.ManaExportStrategy;
 import com.botaeng.me.strategy.ManaImportStrategy;
@@ -22,6 +25,12 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
+        BotaEngItems.init();
+    }
+
+    @SubscribeEvent
+    public void onRegisterItems(final RegistryEvent.Register<Item> event) {
+        BotaEngItems.ITEMS.values().forEach(event.getRegistry()::register);
     }
 
     /**
@@ -40,6 +49,8 @@ public class CommonProxy {
 
         // An interface slot holds a pool's worth.
         GenericSlotCapacities.register(ManaKeyType.INSTANCE, ManaKeyType.POOL);
+
+        BotaEngRecipes.init();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

@@ -1,2 +1,11 @@
+itemGroup.botaeng=Botania Energistics
 botaeng.mana=Mana
 botaeng.mana.pools=%s pools
+item.botaeng.mana_component_1k.name=§61k§r ME Mana Storage Component
+item.botaeng.mana_component_4k.name=§e4k§r ME Mana Storage Component
+item.botaeng.mana_component_16k.name=§a16k§r ME Mana Storage Component
+item.botaeng.mana_component_64k.name=§b64k§r ME Mana Storage Component
+item.botaeng.mana_component_256k.name=§b256k§r ME Mana Storage Component
+item.botaeng.mana_component_1024k.name=§b1024k§r ME Mana Storage Component
+item.botaeng.mana_component_4096k.name=§b4096k§r ME Mana Storage Component
+item.botaeng.mana_component_16384k.name=§b16384k§r ME Mana Storage Component
