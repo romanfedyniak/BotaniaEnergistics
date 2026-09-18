@@ -16,3 +16,10 @@ All notable Botania Energistics changes are grouped by the version in which they
   storage cell holds 1000 mana, which makes a 1k cell about one pool, and a machine operation moves 1000.
   Amounts are counted one mana at a time; a tooltip also says how many pools that is. The idea of mana as a
   key type is [Applied Botanics](https://github.com/ramidzkh/Applied-Botanics)'.
+- **The buses and storage buses of AE2UD move mana.** An export bus, or an interface pushing a pattern, fills
+  any Botania block that takes mana - a pool, a spreader, a runic altar, a terrestrial agglomeration plate. An
+  import bus draws only from a pool, the one block Botania lets mana out of, and a creative pool gives without
+  end, as it does to a spreader. A storage bus mounts a pool as storage both ways and any other such block as
+  a place mana can only be put. Botania does not say how much a block took, so the change in its mana is
+  measured and the network gives exactly that; a mana distributor, which keeps nothing and passes mana on, is
+  left alone because what it took cannot be measured. An interface slot holds a pool's worth.

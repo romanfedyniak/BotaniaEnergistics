@@ -7,9 +7,16 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import appeng.api.behaviors.ExternalStorageStrategy;
+import appeng.api.behaviors.GenericSlotCapacities;
+import appeng.api.behaviors.StackExportStrategy;
+import appeng.api.behaviors.StackImportStrategy;
 import appeng.api.stacks.AEKeyType;
 
 import com.botaeng.me.ManaKeyType;
+import com.botaeng.me.strategy.ManaExportStrategy;
+import com.botaeng.me.strategy.ManaImportStrategy;
+import com.botaeng.me.strategy.ManaStorageAdapter;
 
 public class CommonProxy {
 
@@ -26,6 +33,13 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
+        // With these three, the buses, storage buses and interfaces AE2UD already ships carry mana.
+        StackImportStrategy.register(ManaKeyType.INSTANCE, ManaImportStrategy::create);
+        StackExportStrategy.register(ManaKeyType.INSTANCE, ManaExportStrategy::create);
+        ExternalStorageStrategy.register(ManaKeyType.INSTANCE, ManaStorageAdapter.Strategy::new);
+
+        // An interface slot holds a pool's worth.
+        GenericSlotCapacities.register(ManaKeyType.INSTANCE, ManaKeyType.POOL);
     }
 
     public void postInit(FMLPostInitializationEvent event) {
