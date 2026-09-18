@@ -1,0 +1,33 @@
+{
+    "conditions": [
+        {
+            "type": "minecraft:item_exists",
+            "item": "botaeng:mana_cell_16k"
+        }
+    ],
+    "result": {
+        "item": "botaeng:mana_cell_16k"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "aba",
+        "bcb",
+        "ddd"
+    ],
+    "key": {
+        "a": {
+            "item": "botania:managlass"
+        },
+        "b": {
+            "type": "forge:ore_dict",
+            "ore": "powderMana"
+        },
+        "c": {
+            "item": "botaeng:mana_component_16k"
+        },
+        "d": {
+            "type": "forge:ore_dict",
+            "ore": "ingotManasteel"
+        }
+    }
+}

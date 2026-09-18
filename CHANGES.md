@@ -28,3 +28,8 @@ All notable Botania Energistics changes are grouped by the version in which they
   the tier below, an AE2 processor and the material of its stage of Botania: manasteel and mana powder, mana
   pearls, mana diamonds, elementium and pixie dust, dragonstone, terrasteel, Gaia spirit and Gaia spirit
   ingots, for 10,000 to 1,000,000 mana. The tiers from 256k follow AE2UD's switch for its own large cells.
+- **Mana storage cells, 1k to 16384k.** A mana cell is a mana component in a mana cell housing, made of mana
+  glass, mana powder and manasteel; it is crafted whole, or from a housing and a component, and a cell taken
+  apart gives both back. It holds one type - there is only one mana - and 1000 mana a byte, so a 1k cell holds
+  1,016,000 and a 16384k one about 16.6 billion. Bytes per type and idle drain are those of AE2UD's fluid cells
+  of the same size. It takes an inverter, a sticky and a void card; equal distribution has nothing to divide.

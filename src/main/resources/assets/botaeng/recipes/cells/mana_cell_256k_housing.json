@@ -1,0 +1,20 @@
+{
+    "conditions": [
+        {
+            "type": "minecraft:item_exists",
+            "item": "botaeng:mana_cell_256k"
+        }
+    ],
+    "result": {
+        "item": "botaeng:mana_cell_256k"
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "botaeng:mana_cell_housing"
+        },
+        {
+            "item": "botaeng:mana_component_256k"
+        }
+    ]
+}

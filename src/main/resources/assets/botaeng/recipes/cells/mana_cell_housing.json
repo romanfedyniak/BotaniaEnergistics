@@ -1,0 +1,24 @@
+{
+    "result": {
+        "item": "botaeng:mana_cell_housing"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "aba",
+        "b b",
+        "ccc"
+    ],
+    "key": {
+        "a": {
+            "item": "botania:managlass"
+        },
+        "b": {
+            "type": "forge:ore_dict",
+            "ore": "powderMana"
+        },
+        "c": {
+            "type": "forge:ore_dict",
+            "ore": "ingotManasteel"
+        }
+    }
+}
