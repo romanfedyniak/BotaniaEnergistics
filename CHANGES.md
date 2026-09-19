@@ -61,3 +61,7 @@ All notable Botania Energistics changes are grouped by the version in which they
   the network's mana around in a circle. It is crafted from a mana pool, an engineering processor, two fluix
   glass cables, two elementium ingots, two pixie dust and a fluix crystal. The Fluix Mana Pool is [Botania
   Applie](https://github.com/NNYYOONNIIOO/Botania_Applie)'s.
+- **Moving a runic altar, mana pool or brewery recipe from HEI into a pattern brings its mana along.** Botania
+  draws the mana a recipe takes as a bar and not as an ingredient, so it was left out; now it goes into the
+  processing pattern after the items, as much as the recipe uses - for a brew, as much as the container it is
+  brewed into costs. The recipe is looked up in Botania's own lists by what it makes and what it is made of.
