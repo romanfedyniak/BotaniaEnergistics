@@ -1,0 +1,11 @@
+{
+  "package": "com.botaeng.mixin",
+  "refmap": "mixins.botaeng.refmap.json",
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinBlockCableBus",
+    "MixinTileCableBus"
+  ]
+}

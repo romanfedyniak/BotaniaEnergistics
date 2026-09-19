@@ -12,6 +12,8 @@ import vazkii.botania.api.mana.spark.ISparkAttachable;
 import vazkii.botania.common.block.tile.mana.TileDistributor;
 import vazkii.botania.common.block.tile.mana.TileSpreader;
 
+import appeng.api.parts.IPartHost;
+
 import com.botaeng.tile.TileFluixManaPool;
 
 /**
@@ -41,7 +43,9 @@ public final class ManaReceivers {
         // A distributor passes mana on to the pools around it and never holds any, so what it took cannot be
         // measured: counting it as nothing would leave the network its mana while the pools got it too.
         // A fluix pool is a network's own mana, which a bus on it would only move in a circle.
-        if (!(tile instanceof IManaReceiver) || tile instanceof TileDistributor || tile instanceof TileFluixManaPool) {
+        // A cable bus takes bursts for a tunnel and keeps none of what it is given.
+        if (!(tile instanceof IManaReceiver) || tile instanceof TileDistributor || tile instanceof TileFluixManaPool
+                || tile instanceof IPartHost) {
             return null;
         }
         return (IManaReceiver) tile;

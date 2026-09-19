@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import appeng.api.AEApi;
 import appeng.api.behaviors.ContainerItemStrategy;
@@ -17,6 +18,8 @@ import appeng.api.behaviors.ExternalStorageStrategy;
 import appeng.api.behaviors.GenericSlotCapacities;
 import appeng.api.behaviors.StackExportStrategy;
 import appeng.api.behaviors.StackImportStrategy;
+import appeng.api.config.TunnelType;
+import appeng.api.features.IP2PTunnelRegistry;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.storage.StorageCells;
 import appeng.api.upgrades.CardTraits;
@@ -31,13 +34,20 @@ import com.botaeng.me.strategy.ManaContainerItemStrategy;
 import com.botaeng.me.strategy.ManaExportStrategy;
 import com.botaeng.me.strategy.ManaImportStrategy;
 import com.botaeng.me.strategy.ManaStorageAdapter;
+import com.botaeng.part.PartP2PManaBurst;
 import com.botaeng.tile.TileFluixManaPool;
 
 public class CommonProxy {
 
+    private TunnelType manaTunnel;
+
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
         BotaEngItems.init();
+
+        // Here rather than in init: the tunnel's models are registered with it, and have to be before baking.
+        this.manaTunnel = AEApi.instance().registries().p2pTunnel().registerTunnelType("MANA",
+                new ItemStack(BotaEngItems.MANA_P2P), PartP2PManaBurst.MODELS);
     }
 
     @SubscribeEvent
@@ -73,6 +83,18 @@ public class CommonProxy {
         StorageCells.addCellHandler(new CreativeManaCell.Handler());
 
         BotaEngRecipes.init();
+        this.attuneManaTunnel();
+    }
+
+    /** A tunnel is attuned to bursts with what shoots or shapes them: any lens, any spreader. */
+    private void attuneManaTunnel() {
+        final IP2PTunnelRegistry tunnels = AEApi.instance().registries().p2pTunnel();
+        for (final String name : new String[] {"lens", "spreader"}) {
+            final Item item = Item.getByNameOrId("botania:" + name);
+            if (item != null) {
+                tunnels.addNewAttunement(new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE), this.manaTunnel);
+            }
+        }
     }
 
     public void postInit(FMLPostInitializationEvent event) {

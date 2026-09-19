@@ -17,6 +17,7 @@ import appeng.api.AEApi;
 import appeng.items.materials.MaterialType;
 
 import com.botaeng.block.BlockFluixManaPool;
+import com.botaeng.item.ItemManaBurstP2P;
 import com.botaeng.item.ItemManaStorageCell;
 import com.botaeng.item.ItemPortableManaCell;
 
@@ -41,6 +42,7 @@ public final class BotaEngItems {
     public static Item MANA_CELL_HOUSING;
     public static Item CREATIVE_MANA_CELL;
     public static Block FLUIX_MANA_POOL;
+    public static Item MANA_P2P;
 
     private BotaEngItems() {
     }
@@ -66,6 +68,8 @@ public final class BotaEngItems {
         }
         // No recipe: a pack that wants it as a reward gives it one.
         CREATIVE_MANA_CELL = item("creative_mana_cell", new Item().setMaxStackSize(1));
+
+        MANA_P2P = item("mana_p2p", new ItemManaBurstP2P());
 
         FLUIX_MANA_POOL = block("fluix_mana_pool", new BlockFluixManaPool());
     }

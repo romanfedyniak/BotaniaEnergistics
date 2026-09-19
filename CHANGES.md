@@ -65,3 +65,13 @@ All notable Botania Energistics changes are grouped by the version in which they
   draws the mana a recipe takes as a bar and not as an ingredient, so it was left out; now it goes into the
   processing pattern after the items, as much as the recipe uses - for a brew, as much as the container it is
   brewed into costs. The recipe is looked up in Botania's own lists by what it makes and what it is made of.
+- **A P2P tunnel carries mana bursts.** A burst that strikes the face of an input comes out of the face of an
+  output whole - with its lens, colour, mana and speed - and flies on in the direction that face looks. With
+  several outputs the bursts take turns rather than being split, so a lens does nothing more often than it
+  would have. The burst still answers to the spreader that fired it, so the spreader waits for it as for any
+  other. A burst that strikes the tunnel anywhere but its face, or any other part of the cable, goes out as
+  against a wall. A spreader aims at a tunnel like at a pool, and fires only while an output is online. A
+  tunnel is attuned with any Botania lens or any mana spreader. Since Botania only asks blocks, every AE2 cable
+  now counts to Botania as a block that takes mana and is full unless a burst tunnel on it has somewhere to
+  send the burst - which also keeps a bore lens from breaking cables. The mana P2P tunnel that carries bursts
+  is [Applied Botanics](https://github.com/ramidzkh/Applied-Botanics)'.

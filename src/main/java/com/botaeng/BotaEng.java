@@ -19,7 +19,7 @@ public class BotaEng {
      * No version on AE2UD: the fork shares its mod id with AE2 and AE2UEL, and the version range that tells
      * them apart waits for AE2UD's first release.
      */
-    static final String DEPENDENCIES = "required-after:appliedenergistics2;required-after:botania;after:jei";
+    static final String DEPENDENCIES = "required-after:appliedenergistics2;required-after:botania;required-after:mixinbooter;after:jei";
 
     public static final String MODID = Tags.MOD_ID;
 
