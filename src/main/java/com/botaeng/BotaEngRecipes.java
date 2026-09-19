@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.api.recipe.RecipeRuneAltar;
 
 import appeng.api.AEApi;
 import appeng.api.definitions.IMaterials;
@@ -18,6 +19,9 @@ import appeng.api.definitions.IMaterials;
  * Recipes made on Botania's machines; everything a crafting table makes is in JSON.
  */
 public final class BotaEngRecipes {
+
+    /** The components' recipes, in tier order, for the lexicon. */
+    public static final List<RecipeRuneAltar> COMPONENTS = new ArrayList<>();
 
     private BotaEngRecipes() {
     }
@@ -41,7 +45,8 @@ public final class BotaEngRecipes {
             }
             inputs.add(processor.get());
             Collections.addAll(inputs, tier.materials);
-            BotaniaAPI.registerRuneAltarRecipe(new ItemStack(entry.getValue()), tier.altarMana, inputs.toArray());
+            COMPONENTS.add(BotaniaAPI.registerRuneAltarRecipe(new ItemStack(entry.getValue()), tier.altarMana,
+                    inputs.toArray()));
             below = entry.getValue();
         }
     }

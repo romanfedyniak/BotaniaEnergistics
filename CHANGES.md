@@ -95,3 +95,9 @@ All notable Botania Energistics changes are grouped by the version in which they
   it. Every wireless terminal has a switch for it in its settings drawer, on to begin with, and `wirelessMana`
   in the config turns the whole thing off for a server. Botania's client never counts the network, so the
   mana bar Botania draws for a held tool does not include it.
+- **The Lexica Botania has a category for the mod.** Energistics, after Botania's own categories, holds seven
+  entries: mana in the network, the storage cells and their components, portable cells, the Fluix Mana Pool, the
+  ME Mana Buffer, the burst P2P tunnel and wireless mana, with the recipes of each. The Fluix Mana Pool entry
+  waits for elven knowledge, like Botania's own entries made of elementium. The creative mana cell has no entry.
+  A Fluix Mana Pool or an ME Mana Buffer opens its entry when a lexicon is used on it, and an item of the mod
+  looks itself up in the lexicon as Botania's do.

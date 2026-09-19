@@ -30,6 +30,7 @@ import com.botaeng.BotaEng;
 import com.botaeng.BotaEngGuiHandler;
 import com.botaeng.BotaEngItems;
 import com.botaeng.BotaEngRecipes;
+import com.botaeng.lexicon.BotaEngLexicon;
 import com.botaeng.me.CreativeManaCell;
 import com.botaeng.me.ManaKeyType;
 import com.botaeng.me.strategy.ManaContainerItemStrategy;
@@ -89,6 +90,7 @@ public class CommonProxy {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(BotaEng.INSTANCE, new BotaEngGuiHandler());
         BotaEngRecipes.init();
+        BotaEngLexicon.init();
         this.attuneManaTunnel();
         WirelessMana.register();
     }

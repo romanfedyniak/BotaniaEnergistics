@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -15,14 +16,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
+import vazkii.botania.api.lexicon.ILexiconable;
+import vazkii.botania.api.lexicon.LexiconEntry;
+
 import com.botaeng.BotaEng;
 import com.botaeng.BotaEngGuiHandler;
+import com.botaeng.lexicon.BotaEngLexicon;
 import com.botaeng.tile.TileManaBuffer;
 
 /**
  * The block of {@link TileManaBuffer}.
  */
-public class BlockManaBuffer extends Block {
+public class BlockManaBuffer extends Block implements ILexiconable {
 
     public BlockManaBuffer() {
         super(Material.ROCK);
@@ -64,5 +69,11 @@ public class BlockManaBuffer extends Block {
             }
         }
         super.breakBlock(world, pos, state);
+    }
+
+    @Override
+    public LexiconEntry getEntry(final World world, final BlockPos pos, final EntityPlayer player,
+            final ItemStack lexicon) {
+        return BotaEngLexicon.buffer;
     }
 }

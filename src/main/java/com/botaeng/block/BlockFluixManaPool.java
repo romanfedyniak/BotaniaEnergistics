@@ -31,6 +31,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
+import vazkii.botania.api.lexicon.ILexiconable;
+import vazkii.botania.api.lexicon.LexiconEntry;
 import vazkii.botania.api.wand.IWandHUD;
 import vazkii.botania.api.wand.IWandable;
 import vazkii.botania.common.block.tile.mana.TilePool;
@@ -40,12 +42,13 @@ import appeng.api.parts.IPart;
 import appeng.api.parts.IPartHost;
 import appeng.api.util.AEPartLocation;
 
+import com.botaeng.lexicon.BotaEngLexicon;
 import com.botaeng.tile.TileFluixManaPool;
 
 /**
  * The block of {@link TileFluixManaPool}, shaped and handled like Botania's mana pool.
  */
-public class BlockFluixManaPool extends Block implements IWandHUD, IWandable {
+public class BlockFluixManaPool extends Block implements IWandHUD, IWandable, ILexiconable {
 
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.5, 1);
     private static final AxisAlignedBB BOTTOM_AABB = new AxisAlignedBB(0, 0, 0, 1, 1 / 16.0, 1);
@@ -205,5 +208,11 @@ public class BlockFluixManaPool extends Block implements IWandHUD, IWandable {
     @Override
     public boolean isFullCube(final IBlockState state) {
         return false;
+    }
+
+    @Override
+    public LexiconEntry getEntry(final World world, final BlockPos pos, final EntityPlayer player,
+            final ItemStack lexicon) {
+        return BotaEngLexicon.fluixPool;
     }
 }
