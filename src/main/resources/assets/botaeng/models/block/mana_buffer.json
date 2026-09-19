@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "appliedenergistics2:blocks/interface",
+    "top": "botania:blocks/storage0",
+    "bottom": "botania:blocks/storage0"
+  }
+}

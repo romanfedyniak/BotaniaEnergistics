@@ -75,3 +75,12 @@ All notable Botania Energistics changes are grouped by the version in which they
   now counts to Botania as a block that takes mana and is full unless a burst tunnel on it has somewhere to
   send the burst - which also keeps a bore lens from breaking cables. The mana P2P tunnel that carries bursts
   is [Applied Botanics](https://github.com/ramidzkh/Applied-Botanics)'.
+- **An ME Mana Buffer holds a recipe's items and mana for whatever comes next.** Botania's machines take their
+  items only when they fall in, so an interface cannot fill a runic altar, a pool or a brewery; the buffer
+  gives it somewhere to put the whole recipe instead - 27 slots, as in a chest, enough for a runic altar's
+  sixteen inputs and its livingrock, and 10,000,000 mana, ten pools, set by `manaBufferCapacity` in the config.
+  It does nothing with them itself: what takes them out and where it takes them is up to the player. Its items
+  are an inventory like a chest's from every side, and to Botania it is a mana pool, so a spreader beside it
+  draws its mana and shoots it on, and a burst can fill it; the network's buses and storage buses read it as a
+  pool too. Right-click opens it like a chest, with the mana shown as a bar. Broken, it drops its items and
+  loses its mana, as a pool does. It is crafted from a mana pool, a formation core and seven livingrock.

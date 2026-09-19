@@ -1,0 +1,31 @@
+{
+    "conditions": [
+        {
+            "type": "appliedenergistics2:material_exists",
+            "material": "material.formation_core"
+        }
+    ],
+    "result": {
+        "item": "botaeng:mana_buffer"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "lfl",
+        "lpl",
+        "lll"
+    ],
+    "key": {
+        "l": {
+            "item": "botania:livingrock",
+            "data": 0
+        },
+        "f": {
+            "type": "appliedenergistics2:part",
+            "part": "material.formation_core"
+        },
+        "p": {
+            "item": "botania:pool",
+            "data": 0
+        }
+    }
+}

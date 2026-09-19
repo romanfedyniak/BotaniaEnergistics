@@ -29,6 +29,10 @@ public final class BotaEngConfig {
             "extrabotany:mastermanaring"
     };
 
+    @Config.Comment("How much mana an ME Mana Buffer holds.")
+    @Config.RangeInt(min = 1)
+    public static int manaBufferCapacity = 10_000_000;
+
     /** Parsed from {@link #manaItemBlacklist}; null until first asked, and again after the config changes. */
     private static Map<Item, Set<Integer>> blacklist;
 

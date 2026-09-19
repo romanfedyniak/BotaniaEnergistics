@@ -15,6 +15,7 @@ import vazkii.botania.common.block.tile.mana.TileSpreader;
 import appeng.api.parts.IPartHost;
 
 import com.botaeng.tile.TileFluixManaPool;
+import com.botaeng.tile.TileManaBuffer;
 
 /**
  * How the network puts mana into Botania's blocks and takes it out.
@@ -88,6 +89,9 @@ public final class ManaReceivers {
     private static long space(final IManaReceiver receiver) {
         if (receiver instanceof ISparkAttachable) {
             return ((ISparkAttachable) receiver).getAvailableSpaceForMana();
+        }
+        if (receiver instanceof TileManaBuffer) {
+            return ((TileManaBuffer) receiver).getSpace();
         }
         if (receiver instanceof TileSpreader) {
             return ((TileSpreader) receiver).getMaxMana() - receiver.getCurrentMana();

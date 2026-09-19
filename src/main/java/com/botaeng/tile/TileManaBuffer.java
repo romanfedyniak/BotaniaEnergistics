@@ -1,0 +1,117 @@
+package com.botaeng.tile;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+
+import vazkii.botania.api.mana.IManaPool;
+
+import com.botaeng.BotaEngConfig;
+
+/**
+ * A chest's worth of items and a store of mana that do nothing by themselves: an interface fills it with a
+ * recipe, and whatever the player builds around it takes the recipe out. To Botania it is a pool, so a spreader
+ * beside it draws its mana as from any other, and the network's buses read it as one.
+ */
+public class TileManaBuffer extends TileEntity implements IManaPool {
+
+    public static final int SLOTS = 27;
+
+    private final ItemStackHandler items = new ItemStackHandler(SLOTS) {
+        @Override
+        protected void onContentsChanged(final int slot) {
+            TileManaBuffer.this.markDirty();
+        }
+    };
+
+    private int mana;
+
+    public ItemStackHandler getItems() {
+        return this.items;
+    }
+
+    public static int getCapacity() {
+        return Math.max(1, BotaEngConfig.manaBufferCapacity);
+    }
+
+    /** How much more it takes. */
+    public int getSpace() {
+        return Math.max(0, getCapacity() - this.mana);
+    }
+
+    @Override
+    public int getCurrentMana() {
+        return this.mana;
+    }
+
+    @Override
+    public boolean isFull() {
+        return this.mana >= getCapacity();
+    }
+
+    /** Like a pool, whatever does not fit is lost. */
+    @Override
+    public void recieveMana(final int mana) {
+        final int old = this.mana;
+        this.mana = (int) Math.max(0, Math.min((long) this.mana + mana, getCapacity()));
+        if (old != this.mana) {
+            this.markDirty();
+        }
+    }
+
+    @Override
+    public boolean canRecieveManaFromBursts() {
+        return true;
+    }
+
+    @Override
+    public boolean isOutputtingPower() {
+        return false;
+    }
+
+    /** A pool can be dyed; a buffer cannot. */
+    @Override
+    public EnumDyeColor getColor() {
+        return EnumDyeColor.WHITE;
+    }
+
+    @Override
+    public void setColor(final EnumDyeColor color) {
+    }
+
+    @Override
+    public boolean hasCapability(@Nonnull final Capability<?> capability, @Nullable final EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(@Nonnull final Capability<T> capability, @Nullable final EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
+                ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.items)
+                : super.getCapability(capability, facing);
+    }
+
+    @Nonnull
+    @Override
+    public NBTTagCompound writeToNBT(final NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        tag.setTag("items", this.items.serializeNBT());
+        tag.setInteger("mana", this.mana);
+        return tag;
+    }
+
+    @Override
+    public void readFromNBT(final NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        this.items.deserializeNBT(tag.getCompoundTag("items"));
+        this.mana = tag.getInteger("mana");
+    }
+}

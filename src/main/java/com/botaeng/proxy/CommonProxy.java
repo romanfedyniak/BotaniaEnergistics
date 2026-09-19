@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,6 +27,7 @@ import appeng.api.upgrades.CardTraits;
 import appeng.api.upgrades.IUpgradeRegistry;
 
 import com.botaeng.BotaEng;
+import com.botaeng.BotaEngGuiHandler;
 import com.botaeng.BotaEngItems;
 import com.botaeng.BotaEngRecipes;
 import com.botaeng.me.CreativeManaCell;
@@ -36,6 +38,7 @@ import com.botaeng.me.strategy.ManaImportStrategy;
 import com.botaeng.me.strategy.ManaStorageAdapter;
 import com.botaeng.part.PartP2PManaBurst;
 import com.botaeng.tile.TileFluixManaPool;
+import com.botaeng.tile.TileManaBuffer;
 
 public class CommonProxy {
 
@@ -54,6 +57,7 @@ public class CommonProxy {
     public void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
         BotaEngItems.BLOCKS.values().forEach(event.getRegistry()::register);
         GameRegistry.registerTileEntity(TileFluixManaPool.class, BotaEng.id("fluix_mana_pool"));
+        GameRegistry.registerTileEntity(TileManaBuffer.class, BotaEng.id("mana_buffer"));
     }
 
     @SubscribeEvent
@@ -82,6 +86,7 @@ public class CommonProxy {
         GenericSlotCapacities.register(ManaKeyType.INSTANCE, ManaKeyType.POOL);
         StorageCells.addCellHandler(new CreativeManaCell.Handler());
 
+        NetworkRegistry.INSTANCE.registerGuiHandler(BotaEng.INSTANCE, new BotaEngGuiHandler());
         BotaEngRecipes.init();
         this.attuneManaTunnel();
     }
