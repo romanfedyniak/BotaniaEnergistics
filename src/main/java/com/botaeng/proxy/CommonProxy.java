@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import appeng.api.AEApi;
+import appeng.api.behaviors.ContainerItemStrategy;
 import appeng.api.behaviors.ExternalStorageStrategy;
 import appeng.api.behaviors.GenericSlotCapacities;
 import appeng.api.behaviors.StackExportStrategy;
@@ -23,6 +24,7 @@ import com.botaeng.BotaEngItems;
 import com.botaeng.BotaEngRecipes;
 import com.botaeng.me.CreativeManaCell;
 import com.botaeng.me.ManaKeyType;
+import com.botaeng.me.strategy.ManaContainerItemStrategy;
 import com.botaeng.me.strategy.ManaExportStrategy;
 import com.botaeng.me.strategy.ManaImportStrategy;
 import com.botaeng.me.strategy.ManaStorageAdapter;
@@ -52,6 +54,9 @@ public class CommonProxy {
         StackImportStrategy.register(ManaKeyType.INSTANCE, ManaImportStrategy::create);
         StackExportStrategy.register(ManaKeyType.INSTANCE, ManaExportStrategy::create);
         ExternalStorageStrategy.register(ManaKeyType.INSTANCE, ManaStorageAdapter.Strategy::new);
+
+        // A tablet or a ring fills and empties against a terminal row or a conversion monitor like a bucket.
+        ContainerItemStrategy.register(ManaKeyType.INSTANCE, new ManaContainerItemStrategy());
 
         // An interface slot holds a pool's worth.
         GenericSlotCapacities.register(ManaKeyType.INSTANCE, ManaKeyType.POOL);

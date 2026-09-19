@@ -43,3 +43,11 @@ All notable Botania Energistics changes are grouped by the version in which they
   counts mana in an int, so it sees at most about two billion of the 16384k one's eight; the rest shows as it
   is spent. It takes energy and void cards. Portable mana cells are [Applied
   Botanics](https://github.com/ramidzkh/Applied-Botanics)'.
+- **Mana items fill and empty against a terminal and a conversion monitor, like a bucket.** A mana tablet, a
+  mana ring or a portable mana cell clicked on the mana row, or on a conversion monitor showing mana, takes or
+  gives as much as it holds room for; a creative tablet gives without end. Botania does not say how much an
+  item took, so the change in its mana is measured. An item Botania marks as never giving mana away is not
+  emptied. Items whose worth is the mana put into them are left alone, listed in the config as
+  `manaItemBlacklist`: the Terra Shatterer, which levels up as it fills, the Mana Mirror, whose mana is a pool
+  anywhere in the world, and ExtraBotany's Master Mana Ring, which holds two billion. A portable mana cell
+  neither charges nor draws from them either, or it would charge one as fast as a terminal.

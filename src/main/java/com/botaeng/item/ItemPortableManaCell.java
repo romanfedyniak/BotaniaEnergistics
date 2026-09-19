@@ -12,6 +12,7 @@ import appeng.api.storage.cells.StorageCell;
 import appeng.items.tools.powered.ToolPortableCell;
 import appeng.me.helpers.BaseActionSource;
 
+import com.botaeng.BotaEngConfig;
 import com.botaeng.me.ManaKey;
 import com.botaeng.me.ManaKeyType;
 
@@ -75,7 +76,7 @@ public class ItemPortableManaCell extends ToolPortableCell implements IManaItem 
 
     @Override
     public boolean canReceiveManaFromItem(final ItemStack stack, final ItemStack otherStack) {
-        return true;
+        return !BotaEngConfig.isBlacklisted(otherStack);
     }
 
     @Override
@@ -85,7 +86,8 @@ public class ItemPortableManaCell extends ToolPortableCell implements IManaItem 
 
     @Override
     public boolean canExportManaToItem(final ItemStack stack, final ItemStack otherStack) {
-        return true;
+        // Otherwise a cell in the pocket would charge a blacklisted item as fast as a terminal would.
+        return !BotaEngConfig.isBlacklisted(otherStack);
     }
 
     @Override
