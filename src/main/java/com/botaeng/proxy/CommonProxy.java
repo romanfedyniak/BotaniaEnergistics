@@ -69,6 +69,13 @@ public class CommonProxy {
             upgrades.addTraitSupport(CardTraits.STICKY, stack, 1);
             upgrades.addTraitSupport(CardTraits.VOID, stack, 1);
         }
+        // A portable one keeps the energy cards and charge rate of AE2UD's portable cells.
+        for (final Item cell : BotaEngItems.PORTABLE_CELLS.values()) {
+            final ItemStack stack = new ItemStack(cell);
+            upgrades.addTraitSupport(CardTraits.ENERGY, stack, 2);
+            upgrades.addTraitSupport(CardTraits.VOID, stack, 1);
+            AEApi.instance().registries().charger().addChargeRate(cell, 800d);
+        }
     }
 
 }

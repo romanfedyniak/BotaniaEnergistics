@@ -1,0 +1,35 @@
+{
+    "conditions": [
+        {
+            "type": "forge:and",
+            "values": [
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "appliedenergistics2:energy_cell"
+                },
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "botaeng:portable_mana_cell_16k"
+                }
+            ]
+        }
+    ],
+    "result": {
+        "item": "botaeng:portable_mana_cell_16k"
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "appliedenergistics2:chest"
+        },
+        {
+            "item": "botaeng:mana_component_16k"
+        },
+        {
+            "item": "appliedenergistics2:energy_cell"
+        },
+        {
+            "item": "botaeng:mana_cell_housing"
+        }
+    ]
+}

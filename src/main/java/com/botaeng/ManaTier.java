@@ -3,6 +3,7 @@ package com.botaeng;
 import java.util.function.Function;
 
 import appeng.api.definitions.IItemDefinition;
+import appeng.api.definitions.IItems;
 import appeng.api.definitions.IMaterials;
 
 /**
@@ -12,27 +13,38 @@ import appeng.api.definitions.IMaterials;
  */
 public enum ManaTier {
 
-    T1K("1k", 1, 10_000, IMaterials::logicProcessor, "ingotManasteel", "ingotManasteel", "powderMana", "powderMana"),
-    T4K("4k", 4, 25_000, IMaterials::calcProcessor, "manaPearl", "manaPearl"),
-    T16K("16k", 16, 50_000, IMaterials::calcProcessor, "manaDiamond", "manaDiamond"),
-    T64K("64k", 64, 100_000, IMaterials::calcProcessor,
+    T1K("1k", 1, 10_000, IItems::portableFluidCell1k, IMaterials::logicProcessor,
+            "ingotManasteel", "ingotManasteel", "powderMana", "powderMana"),
+    T4K("4k", 4, 25_000, IItems::portableFluidCell4k, IMaterials::calcProcessor,
+            "manaPearl", "manaPearl"),
+    T16K("16k", 16, 50_000, IItems::portableFluidCell16k, IMaterials::calcProcessor,
+            "manaDiamond", "manaDiamond"),
+    T64K("64k", 64, 100_000, IItems::portableFluidCell64k, IMaterials::calcProcessor,
             "ingotElvenElementium", "ingotElvenElementium", "elvenPixieDust", "elvenPixieDust"),
-    T256K("256k", 256, 200_000, IMaterials::engProcessor, "elvenDragonstone", "elvenDragonstone"),
-    T1024K("1024k", 1024, 400_000, IMaterials::engProcessor, "ingotTerrasteel", "ingotTerrasteel"),
-    T4096K("4096k", 4096, 700_000, IMaterials::engProcessor, "eternalLifeEssence", "eternalLifeEssence"),
-    T16384K("16384k", 16384, 1_000_000, IMaterials::engProcessor, "gaiaIngot", "gaiaIngot");
+    T256K("256k", 256, 200_000, IItems::portableFluidCell256k, IMaterials::engProcessor,
+            "elvenDragonstone", "elvenDragonstone"),
+    T1024K("1024k", 1024, 400_000, IItems::portableFluidCell1024k, IMaterials::engProcessor,
+            "ingotTerrasteel", "ingotTerrasteel"),
+    T4096K("4096k", 4096, 700_000, IItems::portableFluidCell4096k, IMaterials::engProcessor,
+            "eternalLifeEssence", "eternalLifeEssence"),
+    T16384K("16384k", 16384, 1_000_000, IItems::portableFluidCell16384k, IMaterials::engProcessor,
+            "gaiaIngot", "gaiaIngot");
 
     public final String name;
     public final int kilobytes;
     public final int altarMana;
+    /** AE2UD's portable fluid cell of this size; the portable mana cell is there when it is. */
+    public final Function<IItems, IItemDefinition> portableFluidCell;
     public final Function<IMaterials, IItemDefinition> processor;
     public final String[] materials;
 
     ManaTier(final String name, final int kilobytes, final int altarMana,
+            final Function<IItems, IItemDefinition> portableFluidCell,
             final Function<IMaterials, IItemDefinition> processor, final String... materials) {
         this.name = name;
         this.kilobytes = kilobytes;
         this.altarMana = altarMana;
+        this.portableFluidCell = portableFluidCell;
         this.processor = processor;
         this.materials = materials;
     }

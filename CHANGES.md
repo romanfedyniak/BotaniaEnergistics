@@ -35,3 +35,11 @@ All notable Botania Energistics changes are grouped by the version in which they
   of the same size. It takes an inverter, a sticky and a void card; equal distribution has nothing to divide.
 - **A creative mana cell.** It hands out mana without end and swallows whatever is put in, like an AE2UD
   creative cell given mana, but as an item of its own with no recipe, so a pack can make it a reward.
+- **Portable mana cells, 1k to 16384k, that Botania takes for a mana tablet.** Each is AE2UD's portable cell
+  holding mana, made from a chest, a mana component, an energy cell and a mana cell housing, and there for
+  every size AE2UD has a portable fluid cell. Carried, its mana is spent by Botania's tools and armour and
+  passed to other mana items, and a pool fills or empties it, all without AE energy, as a tablet costs none.
+  It holds one type and half what a cell of its size does, so the 1k one is almost exactly a tablet. Botania
+  counts mana in an int, so it sees at most about two billion of the 16384k one's eight; the rest shows as it
+  is spent. It takes energy and void cards. Portable mana cells are [Applied
+  Botanics](https://github.com/ramidzkh/Applied-Botanics)'.
