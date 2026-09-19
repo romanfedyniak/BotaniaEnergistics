@@ -15,11 +15,13 @@ import appeng.api.behaviors.GenericSlotCapacities;
 import appeng.api.behaviors.StackExportStrategy;
 import appeng.api.behaviors.StackImportStrategy;
 import appeng.api.stacks.AEKeyType;
+import appeng.api.storage.StorageCells;
 import appeng.api.upgrades.CardTraits;
 import appeng.api.upgrades.IUpgradeRegistry;
 
 import com.botaeng.BotaEngItems;
 import com.botaeng.BotaEngRecipes;
+import com.botaeng.me.CreativeManaCell;
 import com.botaeng.me.ManaKeyType;
 import com.botaeng.me.strategy.ManaExportStrategy;
 import com.botaeng.me.strategy.ManaImportStrategy;
@@ -53,6 +55,7 @@ public class CommonProxy {
 
         // An interface slot holds a pool's worth.
         GenericSlotCapacities.register(ManaKeyType.INSTANCE, ManaKeyType.POOL);
+        StorageCells.addCellHandler(new CreativeManaCell.Handler());
 
         BotaEngRecipes.init();
     }

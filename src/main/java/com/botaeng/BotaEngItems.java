@@ -33,6 +33,7 @@ public final class BotaEngItems {
     public static final Map<ManaTier, Item> COMPONENTS = new EnumMap<>(ManaTier.class);
     public static final Map<ManaTier, Item> CELLS = new EnumMap<>(ManaTier.class);
     public static Item MANA_CELL_HOUSING;
+    public static Item CREATIVE_MANA_CELL;
 
     private BotaEngItems() {
     }
@@ -51,6 +52,8 @@ public final class BotaEngItems {
             final MaterialType universal = MaterialType.valueOf("CELL" + tier.name.toUpperCase(Locale.ROOT) + "_PART");
             CELLS.put(tier, item("mana_cell_" + tier.name, new ItemManaStorageCell(tier, universal)));
         }
+        // No recipe: a pack that wants it as a reward gives it one.
+        CREATIVE_MANA_CELL = item("creative_mana_cell", new Item().setMaxStackSize(1));
     }
 
     private static Item item(final String name, final Item item) {

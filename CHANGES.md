@@ -33,3 +33,5 @@ All notable Botania Energistics changes are grouped by the version in which they
   apart gives both back. It holds one type - there is only one mana - and 1000 mana a byte, so a 1k cell holds
   1,016,000 and a 16384k one about 16.6 billion. Bytes per type and idle drain are those of AE2UD's fluid cells
   of the same size. It takes an inverter, a sticky and a void card; equal distribution has nothing to divide.
+- **A creative mana cell.** It hands out mana without end and swallows whatever is put in, like an AE2UD
+  creative cell given mana, but as an item of its own with no recipe, so a pack can make it a reward.
