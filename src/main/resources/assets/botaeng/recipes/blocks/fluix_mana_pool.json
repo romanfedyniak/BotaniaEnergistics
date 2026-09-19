@@ -1,0 +1,56 @@
+{
+    "conditions": [
+        {
+            "type": "forge:and",
+            "values": [
+                {
+                    "type": "appliedenergistics2:material_exists",
+                    "material": "material.engineering_processor"
+                },
+                {
+                    "type": "appliedenergistics2:material_exists",
+                    "material": "material.fluix_crystal"
+                },
+                {
+                    "type": "appliedenergistics2:part_exists",
+                    "part": "cable_glass.fluix"
+                }
+            ]
+        }
+    ],
+    "result": {
+        "item": "botaeng:fluix_mana_pool"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "aba",
+        "cdc",
+        "efe"
+    ],
+    "key": {
+        "a": {
+            "type": "forge:ore_dict",
+            "ore": "ingotElvenElementium"
+        },
+        "b": {
+            "type": "appliedenergistics2:part",
+            "part": "material.engineering_processor"
+        },
+        "c": {
+            "type": "appliedenergistics2:part",
+            "part": "cable_glass.fluix"
+        },
+        "d": {
+            "item": "botania:pool",
+            "data": 0
+        },
+        "e": {
+            "type": "forge:ore_dict",
+            "ore": "elvenPixieDust"
+        },
+        "f": {
+            "type": "appliedenergistics2:part",
+            "part": "material.fluix_crystal"
+        }
+    }
+}

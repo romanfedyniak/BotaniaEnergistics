@@ -7,13 +7,16 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import appeng.api.AEApi;
 import appeng.items.materials.MaterialType;
 
+import com.botaeng.block.BlockFluixManaPool;
 import com.botaeng.item.ItemManaStorageCell;
 import com.botaeng.item.ItemPortableManaCell;
 
@@ -30,12 +33,14 @@ public final class BotaEngItems {
         }
     };
 
+    public static final Map<String, Block> BLOCKS = new LinkedHashMap<>();
     public static final Map<String, Item> ITEMS = new LinkedHashMap<>();
     public static final Map<ManaTier, Item> COMPONENTS = new EnumMap<>(ManaTier.class);
     public static final Map<ManaTier, Item> CELLS = new EnumMap<>(ManaTier.class);
     public static final Map<ManaTier, Item> PORTABLE_CELLS = new EnumMap<>(ManaTier.class);
     public static Item MANA_CELL_HOUSING;
     public static Item CREATIVE_MANA_CELL;
+    public static Block FLUIX_MANA_POOL;
 
     private BotaEngItems() {
     }
@@ -61,6 +66,17 @@ public final class BotaEngItems {
         }
         // No recipe: a pack that wants it as a reward gives it one.
         CREATIVE_MANA_CELL = item("creative_mana_cell", new Item().setMaxStackSize(1));
+
+        FLUIX_MANA_POOL = block("fluix_mana_pool", new BlockFluixManaPool());
+    }
+
+    private static Block block(final String name, final Block block) {
+        block.setRegistryName(BotaEng.id(name));
+        block.setTranslationKey(BotaEng.MODID + "." + name);
+        block.setCreativeTab(TAB);
+        BLOCKS.put(name, block);
+        ITEMS.put(name, new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        return block;
     }
 
     private static Item item(final String name, final Item item) {

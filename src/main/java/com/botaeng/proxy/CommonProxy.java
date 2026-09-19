@@ -1,5 +1,6 @@
 package com.botaeng.proxy;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import appeng.api.AEApi;
 import appeng.api.behaviors.ContainerItemStrategy;
@@ -20,6 +22,7 @@ import appeng.api.storage.StorageCells;
 import appeng.api.upgrades.CardTraits;
 import appeng.api.upgrades.IUpgradeRegistry;
 
+import com.botaeng.BotaEng;
 import com.botaeng.BotaEngItems;
 import com.botaeng.BotaEngRecipes;
 import com.botaeng.me.CreativeManaCell;
@@ -28,12 +31,19 @@ import com.botaeng.me.strategy.ManaContainerItemStrategy;
 import com.botaeng.me.strategy.ManaExportStrategy;
 import com.botaeng.me.strategy.ManaImportStrategy;
 import com.botaeng.me.strategy.ManaStorageAdapter;
+import com.botaeng.tile.TileFluixManaPool;
 
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
         BotaEngItems.init();
+    }
+
+    @SubscribeEvent
+    public void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
+        BotaEngItems.BLOCKS.values().forEach(event.getRegistry()::register);
+        GameRegistry.registerTileEntity(TileFluixManaPool.class, BotaEng.id("fluix_mana_pool"));
     }
 
     @SubscribeEvent

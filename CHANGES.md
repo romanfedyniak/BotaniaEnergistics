@@ -51,3 +51,13 @@ All notable Botania Energistics changes are grouped by the version in which they
   `manaItemBlacklist`: the Terra Shatterer, which levels up as it fills, the Mana Mirror, whose mana is a pool
   anywhere in the world, and ExtraBotany's Master Mana Ring, which holds two billion. A portable mana cell
   neither charges nor draws from them either, or it would charge one as fast as a terminal.
+- **The Fluix Mana Pool is a mana pool whose mana is the network's.** It keeps none of its own: what it shows
+  is the mana on the ME network it is joined to, and whatever Botania puts in or takes out goes to and from
+  that network, costing the network the energy a bus would pay. So a spreader beside it draws on the network,
+  functional flowers bound to it run on the network, sparks can fill the network through
+  it, items thrown in are infused or charged from the network, and a pool under an elven gateway pylon pays the
+  portal from it. It needs a channel; offline it reads empty and full. Botania counts a pool's mana in an int,
+  so it shows at most about two billion. The buses and storage buses leave it alone, since they would only move
+  the network's mana around in a circle. It is crafted from a mana pool, an engineering processor, two fluix
+  glass cables, two elementium ingots, two pixie dust and a fluix crystal. The Fluix Mana Pool is [Botania
+  Applie](https://github.com/NNYYOONNIIOO/Botania_Applie)'s.

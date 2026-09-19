@@ -1,0 +1,21 @@
+{
+  "textures": {
+    "port": "appliedenergistics2:blocks/interface",
+    "side": "appliedenergistics2:blocks/fluix_block",
+    "particle": "appliedenergistics2:blocks/fluix_block"
+  },
+  "elements": [
+    {
+      "from": [ 4, 4, -0.01 ],
+      "to": [ 12, 12, 2 ],
+      "faces": {
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#port", "cullface": "north" },
+        "south": { "texture": "#side" },
+        "east": { "texture": "#side" },
+        "west": { "texture": "#side" },
+        "up": { "texture": "#side" },
+        "down": { "texture": "#side" }
+      }
+    }
+  ]
+}

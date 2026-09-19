@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    { "apply": { "model": "botaeng:fluix_mana_pool" } },
+    { "when": { "north": "true" }, "apply": { "model": "botaeng:fluix_mana_pool_connector" } },
+    { "when": { "east": "true" }, "apply": { "model": "botaeng:fluix_mana_pool_connector", "y": 90 } },
+    { "when": { "south": "true" }, "apply": { "model": "botaeng:fluix_mana_pool_connector", "y": 180 } },
+    { "when": { "west": "true" }, "apply": { "model": "botaeng:fluix_mana_pool_connector", "y": 270 } }
+  ]
+}
