@@ -29,6 +29,11 @@ public final class BotaEngConfig {
             "extrabotany:mastermanaring"
     };
 
+    @Config.Comment({
+            "Whether Botania's tools and armour may draw mana from an ME network through a wireless terminal the",
+            "player carries. Each terminal also has its own switch."})
+    public static boolean wirelessMana = true;
+
     @Config.Comment("How much mana an ME Mana Buffer holds.")
     @Config.RangeInt(min = 1)
     public static int manaBufferCapacity = 10_000_000;

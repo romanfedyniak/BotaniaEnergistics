@@ -84,3 +84,14 @@ All notable Botania Energistics changes are grouped by the version in which they
   draws its mana and shoots it on, and a burst can fill it; the network's buses and storage buses read it as a
   pool too. Right-click opens it like a chest, with the mana shown as a bar. Broken, it drops its items and
   loses its mana, as a pool does. It is crafted from a mana pool, a formation core and seven livingrock.
+- **Botania's tools and armour draw mana from an ME network through a wireless terminal.** A player carrying a
+  linked wireless terminal in range of an access point spends the network's mana once the tablets, rings and
+  portable mana cells they carry are empty - the network is offered to Botania after everything in the
+  inventory, though a ring worn as a bauble is still counted after it, since Botania looks at baubles last. It
+  only ever takes: nothing a player carries charges into the network. It goes by the rules of opening the
+  terminal - linked, charged, in range, and the player allowed to take things out of that network - and each
+  network is counted once however many terminals reach it. The terminal's battery pays the network for moving
+  the mana, and half an AE more each time mana is drawn. Items on the mana item blacklist are not charged from
+  it. Every wireless terminal has a switch for it in its settings drawer, on to begin with, and `wirelessMana`
+  in the config turns the whole thing off for a server. Botania's client never counts the network, so the
+  mana bar Botania draws for a held tool does not include it.

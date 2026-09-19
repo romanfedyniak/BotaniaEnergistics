@@ -31,3 +31,7 @@ tile.botaeng.fluix_mana_pool.name=Fluix Mana Pool
 item.botaeng.mana_p2p.name=P2P Tunnel - Mana Bursts
 tile.botaeng.mana_buffer.name=ME Mana Buffer
 gui.botaeng.mana_buffer.mana=%s / %s mana (%s pools)
+item.botaeng.network_mana.name=Network Mana
+gui.botaeng.wireless_mana=Wireless Mana
+gui.botaeng.wireless_mana.on=Botania tools and armour draw mana from the network once what you carry runs out
+gui.botaeng.wireless_mana.off=Botania tools and armour do not reach the network

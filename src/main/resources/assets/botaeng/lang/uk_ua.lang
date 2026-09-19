@@ -31,3 +31,7 @@ tile.botaeng.fluix_mana_pool.name=Мінливий басейн мани
 item.botaeng.mana_p2p.name=P2P-тунель — спалахи мани
 tile.botaeng.mana_buffer.name=МЕ-буфер мани
 gui.botaeng.mana_buffer.mana=%s / %s мани (басейнів: %s)
+item.botaeng.network_mana.name=Мана мережі
+gui.botaeng.wireless_mana=Бездротова мана
+gui.botaeng.wireless_mana.on=Інструменти й броня Ботанії беруть ману з мережі, коли закінчується та, що при собі
+gui.botaeng.wireless_mana.off=Інструменти й броня Ботанії не беруть ману з мережі

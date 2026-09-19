@@ -21,6 +21,7 @@ import com.botaeng.block.BlockManaBuffer;
 import com.botaeng.item.ItemManaBurstP2P;
 import com.botaeng.item.ItemManaStorageCell;
 import com.botaeng.item.ItemPortableManaCell;
+import com.botaeng.wireless.ItemNetworkMana;
 
 /**
  * Everything the mod registers, by registry name.
@@ -45,6 +46,7 @@ public final class BotaEngItems {
     public static Block FLUIX_MANA_POOL;
     public static Block MANA_BUFFER;
     public static Item MANA_P2P;
+    public static Item NETWORK_MANA;
 
     private BotaEngItems() {
     }
@@ -72,6 +74,8 @@ public final class BotaEngItems {
         CREATIVE_MANA_CELL = item("creative_mana_cell", new Item().setMaxStackSize(1));
 
         MANA_P2P = item("mana_p2p", new ItemManaBurstP2P());
+        // In no creative tab: it only ever stands for a network in Botania's list of a player's mana items.
+        NETWORK_MANA = item("network_mana", new ItemNetworkMana()).setCreativeTab(null);
 
         FLUIX_MANA_POOL = block("fluix_mana_pool", new BlockFluixManaPool());
         MANA_BUFFER = block("mana_buffer", new BlockManaBuffer());

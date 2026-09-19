@@ -39,6 +39,7 @@ import com.botaeng.me.strategy.ManaStorageAdapter;
 import com.botaeng.part.PartP2PManaBurst;
 import com.botaeng.tile.TileFluixManaPool;
 import com.botaeng.tile.TileManaBuffer;
+import com.botaeng.wireless.WirelessMana;
 
 public class CommonProxy {
 
@@ -89,6 +90,7 @@ public class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(BotaEng.INSTANCE, new BotaEngGuiHandler());
         BotaEngRecipes.init();
         this.attuneManaTunnel();
+        WirelessMana.register();
     }
 
     /** A tunnel is attuned to bursts with what shoots or shapes them: any lens, any spreader. */
