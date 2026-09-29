@@ -1,7 +1,12 @@
 package com.botaeng.tile;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,21 +15,25 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import vazkii.botania.api.mana.IManaPool;
+import vazkii.botania.api.mana.spark.ISparkAttachable;
+import vazkii.botania.api.mana.spark.ISparkEntity;
 
 import com.botaeng.BotaEngConfig;
 
 /**
  * A chest's worth of items and a store of mana that do nothing by themselves: an interface fills it with a
  * recipe, and whatever the player builds around it takes the recipe out. To Botania it is a pool, so a spreader
- * beside it draws its mana as from any other, and the network's buses read it as one.
+ * beside it draws its mana as from any other, a spark on top moves mana in and out, and the network's buses read
+ * it as one.
  */
-public class TileManaBuffer extends TileEntity implements IManaPool {
+public class TileManaBuffer extends TileEntity implements IManaPool, ISparkAttachable {
 
     public static final int SLOTS = 27;
 
@@ -115,6 +124,34 @@ public class TileManaBuffer extends TileEntity implements IManaPool {
 
     @Override
     public void setColor(final EnumDyeColor color) {
+    }
+
+    @Override
+    public boolean canAttachSpark(final ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public void attachSpark(final ISparkEntity entity) {
+    }
+
+    /** The spark standing on top, as a pool finds its own. */
+    @Nullable
+    @Override
+    public ISparkEntity getAttachedSpark() {
+        final List<Entity> sparks = this.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos.up()),
+                entity -> entity instanceof ISparkEntity);
+        return sparks.size() == 1 ? (ISparkEntity) sparks.get(0) : null;
+    }
+
+    @Override
+    public boolean areIncomingTranfersDone() {
+        return false;
+    }
+
+    @Override
+    public int getAvailableSpaceForMana() {
+        return this.getSpace();
     }
 
     @Override
