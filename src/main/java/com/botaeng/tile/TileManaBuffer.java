@@ -30,8 +30,8 @@ import com.botaeng.BotaEngConfig;
 /**
  * A chest's worth of items and a store of mana that do nothing by themselves: an interface fills it with a
  * recipe, and whatever the player builds around it takes the recipe out. To Botania it is a pool, so a spreader
- * beside it draws its mana as from any other, a spark on top moves mana in and out, and the network's buses read
- * it as one.
+ * beside it draws its mana as from any other, a spark on top takes it away, and the network's buses read it as
+ * one. Mana goes in only with a pattern: bursts, sparks and buses find it full.
  */
 public class TileManaBuffer extends TileEntity implements IManaPool, ISparkAttachable {
 
@@ -73,9 +73,24 @@ public class TileManaBuffer extends TileEntity implements IManaPool, ISparkAttac
         return this.mana >= getCapacity();
     }
 
-    /** Like a pool, whatever does not fit is lost. */
+    /** Only draws: whatever offers mana here is refused, since it goes in only with a pattern. */
     @Override
     public void recieveMana(final int mana) {
+        if (mana < 0) {
+            this.change(mana);
+        }
+    }
+
+    /** What an ME interface pushes with a pattern: the one way mana goes in. Answers how much fits. */
+    public int fill(final int mana, final boolean simulate) {
+        final int taken = Math.min(Math.max(0, mana), this.getSpace());
+        if (!simulate && taken > 0) {
+            this.change(taken);
+        }
+        return taken;
+    }
+
+    private void change(final int mana) {
         final int old = this.mana;
         this.mana = (int) Math.max(0, Math.min((long) this.mana + mana, getCapacity()));
         if (old != this.mana) {
@@ -108,7 +123,7 @@ public class TileManaBuffer extends TileEntity implements IManaPool, ISparkAttac
 
     @Override
     public boolean canRecieveManaFromBursts() {
-        return true;
+        return false;
     }
 
     @Override
@@ -151,7 +166,7 @@ public class TileManaBuffer extends TileEntity implements IManaPool, ISparkAttac
 
     @Override
     public int getAvailableSpaceForMana() {
-        return this.getSpace();
+        return 0;
     }
 
     @Override

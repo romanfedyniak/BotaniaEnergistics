@@ -81,8 +81,9 @@ All notable Botania Energistics changes are grouped by the version in which they
   sixteen inputs and its livingrock, and 10,000,000 mana, ten pools, set by `manaBufferCapacity` in the config.
   It does nothing with them itself: what takes them out and where it takes them is up to the player. Its items
   are an inventory like a chest's from every side, and to Botania it is a mana pool, so a spreader beside it
-  draws its mana and shoots it on, a burst can fill it, and a spark set on top moves mana in and out of it as
-  it does a pool's; the network's buses and storage buses read it as a pool too. Right-click opens it like a chest, with the mana shown as a bar. Broken, it drops its items and
+  draws its mana and shoots it on and a spark set on top takes it away; the network's buses and storage buses
+  read it as a pool too. Mana goes in only with a pattern an ME interface pushes: bursts, sparks, export buses
+  and storage buses find it full. Right-click opens it like a chest, with the mana shown as a bar. Broken, it drops its items and
   loses its mana, as a pool does. It is crafted from a mana pool, a formation core and seven livingrock. It looks
   like a mana pool under a glass lid, filled as high as the buffer is full.
 - **Botania's tools and armour draw mana from an ME network through a wireless terminal.** A player carrying a

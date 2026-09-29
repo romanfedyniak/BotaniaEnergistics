@@ -12,6 +12,7 @@ import appeng.api.config.Actionable;
 import appeng.api.stacks.AEKey;
 
 import com.botaeng.me.ManaKey;
+import com.botaeng.tile.TileManaBuffer;
 
 /**
  * What an export bus, an interface or a machine pushes into any Botania block that takes mana: a pool, a
@@ -61,6 +62,11 @@ public class ManaExportStrategy implements StackExportStrategy {
             return 0;
         }
         final IManaReceiver receiver = ManaReceivers.find(this.world, this.fromPos);
+        if (receiver instanceof TileManaBuffer) {
+            // A push is an interface handing over a pattern, the only mana a buffer takes.
+            return ((TileManaBuffer) receiver).fill((int) Math.min(maxAmount, Integer.MAX_VALUE),
+                    mode == Actionable.SIMULATE);
+        }
         return receiver == null ? 0 : ManaReceivers.insert(receiver, maxAmount, mode == Actionable.SIMULATE);
     }
 
