@@ -1,0 +1,8 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "base": [{ "model": "botaeng:mana_buffer" }],
+    "body": [{ "model": "botaeng:mana_buffer_body" }],
+    "glass": [{ "model": "botaeng:mana_buffer_glass" }]
+  }
+}

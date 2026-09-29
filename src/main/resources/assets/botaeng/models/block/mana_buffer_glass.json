@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:block/block",
+  "texture_size": [
+    32,
+    32
+  ],
+  "textures": {
+    "2": "botaeng:blocks/mana_buffer",
+    "liquid": "botania:blocks/mana_water",
+    "particle": "botaeng:blocks/mana_buffer"
+  },
+  "elements": [
+    {
+      "name": "block",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ],
+          "texture": "#2"
+        }
+      }
+    }
+  ]
+}

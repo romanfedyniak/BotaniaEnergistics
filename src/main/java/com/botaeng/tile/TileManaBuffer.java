@@ -5,8 +5,12 @@ import javax.annotation.Nullable;
 
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -24,6 +28,9 @@ public class TileManaBuffer extends TileEntity implements IManaPool {
 
     public static final int SLOTS = 27;
 
+    /** How many heights the surface in the block steps through; the client hears of a change only between them. */
+    private static final int LEVELS = 64;
+
     private final ItemStackHandler items = new ItemStackHandler(SLOTS) {
         @Override
         protected void onContentsChanged(final int slot) {
@@ -32,6 +39,7 @@ public class TileManaBuffer extends TileEntity implements IManaPool {
     };
 
     private int mana;
+    private int sentLevel = -1;
 
     public ItemStackHandler getItems() {
         return this.items;
@@ -63,7 +71,30 @@ public class TileManaBuffer extends TileEntity implements IManaPool {
         this.mana = (int) Math.max(0, Math.min((long) this.mana + mana, getCapacity()));
         if (old != this.mana) {
             this.markDirty();
+            this.sendLevel();
         }
+    }
+
+    /** How full it looks: 0 when empty, then 1 to {@link #LEVELS}. */
+    private int level() {
+        return this.mana <= 0 ? 0 : 1 + (int) ((long) this.mana * (LEVELS - 1) / getCapacity());
+    }
+
+    private void sendLevel() {
+        if (!(this.world instanceof WorldServer) || this.level() == this.sentLevel) {
+            return;
+        }
+        this.sentLevel = this.level();
+        final PlayerChunkMapEntry watchers = ((WorldServer) this.world).getPlayerChunkMap()
+                .getEntry(this.pos.getX() >> 4, this.pos.getZ() >> 4);
+        if (watchers != null) {
+            watchers.sendPacket(this.getUpdatePacket());
+        }
+    }
+
+    /** How full the pool inside is drawn, from 0 to 1. */
+    public float getFill() {
+        return Math.min(1.0F, (float) this.mana / getCapacity());
     }
 
     @Override
@@ -113,5 +144,28 @@ public class TileManaBuffer extends TileEntity implements IManaPool {
         super.readFromNBT(tag);
         this.items.deserializeNBT(tag.getCompoundTag("items"));
         this.mana = tag.getInteger("mana");
+    }
+
+    @Nonnull
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        final NBTTagCompound tag = super.getUpdateTag();
+        tag.setInteger("mana", this.mana);
+        return tag;
+    }
+
+    @Override
+    public void handleUpdateTag(@Nonnull final NBTTagCompound tag) {
+        this.mana = tag.getInteger("mana");
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
+    }
+
+    @Override
+    public void onDataPacket(final NetworkManager net, final SPacketUpdateTileEntity packet) {
+        this.handleUpdateTag(packet.getNbtCompound());
     }
 }

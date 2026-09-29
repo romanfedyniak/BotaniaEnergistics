@@ -1,10 +1,14 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "botaeng:mana_buffer"
+    "model": "forge:multi-layer",
+    "custom": {
+      "base": "botaeng:mana_buffer_layers#base",
+      "Solid": "botaeng:mana_buffer_layers#body",
+      "Translucent": "botaeng:mana_buffer_layers#glass"
+    }
   },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "normal": [{}]
   }
 }

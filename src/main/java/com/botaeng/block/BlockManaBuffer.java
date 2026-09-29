@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +35,17 @@ public class BlockManaBuffer extends Block implements ILexiconable {
         this.setHardness(2.0F);
         this.setResistance(10.0F);
         this.setSoundType(SoundType.STONE);
+    }
+
+    @Override
+    public boolean isOpaqueCube(final IBlockState state) {
+        return false;
+    }
+
+    /** The glass lid is translucent; the rest stays solid, or the pool shows through the walls. */
+    @Override
+    public boolean canRenderInLayer(final IBlockState state, @Nonnull final BlockRenderLayer layer) {
+        return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
     }
 
     @Override

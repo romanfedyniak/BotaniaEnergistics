@@ -12,9 +12,11 @@ import appeng.api.client.AEKeyRendering;
 import com.botaeng.BotaEngItems;
 import com.botaeng.client.ManaKeyRenderHandler;
 import com.botaeng.client.RenderFluixManaPool;
+import com.botaeng.client.RenderManaBuffer;
 import com.botaeng.integration.ManaRecipeInputs;
 import com.botaeng.me.ManaKeyType;
 import com.botaeng.tile.TileFluixManaPool;
+import com.botaeng.tile.TileManaBuffer;
 
 public class ClientProxy extends CommonProxy {
 
@@ -30,6 +32,7 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         AEKeyRendering.register(ManaKeyType.INSTANCE, new ManaKeyRenderHandler());
         ClientRegistry.bindTileEntitySpecialRenderer(TileFluixManaPool.class, new RenderFluixManaPool());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileManaBuffer.class, new RenderManaBuffer());
         // Moving a recipe from HEI into a pattern happens on the client alone.
         ManaRecipeInputs.register();
     }
