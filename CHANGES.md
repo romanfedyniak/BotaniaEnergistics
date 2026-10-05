@@ -96,7 +96,8 @@ All notable Botania Energistics changes are grouped by the version in which they
   the mana, and half an AE more each time mana is drawn. Items on the mana item blacklist are not charged from
   it. Every wireless terminal has a switch for it in its settings drawer, on to begin with, and `wirelessMana`
   in the config turns the whole thing off for a server. Botania's client never counts the network, so the
-  mana bar Botania draws for a held tool does not include it.
+  mana bar Botania draws for a held tool does not include it. The item that stands for the network in Botania's
+  count is hidden from HEI.
 - **The Lexica Botania has a category for the mod.** Energistics, after Botania's own categories, holds seven
   entries: mana in the network, the storage cells and their components, portable cells, the Fluix Mana Pool, the
   ME Mana Buffer, the burst P2P tunnel and wireless mana, with the recipes of each. The Fluix Mana Pool entry
