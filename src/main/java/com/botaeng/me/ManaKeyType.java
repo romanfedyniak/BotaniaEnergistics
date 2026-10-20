@@ -21,7 +21,7 @@ import com.botaeng.BotaEng;
 
 /**
  * Mana as a kind of content a network can hold, counted one mana at a time. A byte of a cell holds 1000, so a
- * 1k cell is about one pool.
+ * 1k cell is about one pool, and a crafting job charges a byte of its CPU per 1000 too, as it does per bucket.
  */
 public final class ManaKeyType extends AEKeyType {
 
@@ -51,6 +51,11 @@ public final class ManaKeyType extends AEKeyType {
 
     @Override
     public int getAmountPerByte() {
+        return 1000;
+    }
+
+    @Override
+    public int getAmountPerCraftingByte() {
         return 1000;
     }
 
