@@ -15,6 +15,8 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
 import vazkii.botania.api.mana.ManaItemsEvent;
 
 import appeng.api.config.Actionable;
@@ -60,6 +62,9 @@ public final class WirelessMana {
 
     /** Worked out once a tick per player: Botania may ask many times in one. */
     private static final Map<EntityPlayer, Cached> CACHE = new WeakHashMap<>();
+
+    /** How often the player's inventory is searched for terminals even while the ones found still answer. */
+    private static final int RESCAN_TICKS = 20;
 
     private final EntityPlayer player;
     private final List<WirelessTerminalGuiObject> terminals;
@@ -135,6 +140,10 @@ public final class WirelessMana {
         if (cached != null && cached.tick == tick) {
             return cached.source;
         }
+        if (cached != null && tick - cached.scanned < RESCAN_TICKS && tick > cached.scanned && cached.stillReachable(player)) {
+            cached.tick = tick;
+            return cached.source;
+        }
         final List<WirelessTerminalGuiObject> terminals = new ArrayList<>();
         final List<IGrid> grids = new ArrayList<>();
         for (final WirelessTerminalGuiObject terminal : WirelessTerminalAccess.reachable(player, TOGGLE::isOn)) {
@@ -155,15 +164,50 @@ public final class WirelessMana {
         return source;
     }
 
+    /**
+     * The terminals found last time, each checked again on every tick that uses them: still in the player's
+     * inventory or baubles, still switched on, still in range. Anything less and the inventory is searched anew.
+     * Searching it built a terminal object for every terminal the player carries, every tick Botania asked.
+     */
     private static final class Cached {
 
-        private final long tick;
+        private long tick;
+        private final long scanned;
         @Nullable
         private final WirelessMana source;
 
         private Cached(final long tick, @Nullable final WirelessMana source) {
             this.tick = tick;
+            this.scanned = tick;
             this.source = source;
+        }
+
+        private boolean stillReachable(final EntityPlayer player) {
+            if (this.source == null) {
+                return true;
+            }
+            for (final WirelessTerminalGuiObject terminal : this.source.terminals) {
+                final ItemStack stack = terminal.getItemStack();
+                if (!carries(player, stack) || !TOGGLE.isOn(stack) || !terminal.rangeCheck()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static boolean carries(final EntityPlayer player, final ItemStack stack) {
+            for (final ItemStack held : player.inventory.mainInventory) {
+                if (held == stack) {
+                    return true;
+                }
+            }
+            final IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+            for (int i = 0; i < baubles.getSlots(); i++) {
+                if (baubles.getStackInSlot(i) == stack) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
