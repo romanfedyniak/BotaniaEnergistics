@@ -21,6 +21,7 @@ import vazkii.botania.common.item.ItemManaTablet;
 import vazkii.botania.common.item.ModItems;
 
 import appeng.api.config.Actionable;
+import appeng.api.config.PowerMultiplier;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.security.IActionHost;
@@ -37,6 +38,7 @@ import appeng.util.Platform;
 
 import com.botaeng.BotaEngItems;
 import com.botaeng.me.ManaKey;
+import com.botaeng.me.ManaKeyType;
 
 /**
  * A mana pool that holds nothing itself: what it shows is the mana of the ME network it is on, and what Botania
@@ -84,7 +86,26 @@ public class TileFluixManaPool extends TilePool implements IGridProxyable, IActi
             return this.shownMana;
         }
         final MEStorage storage = this.storage();
-        return storage == null ? 0 : clamp(this.cachedMana());
+        return storage == null ? 0 : clamp(this.availableMana());
+    }
+
+    /**
+     * What a taker would really get: no more than the network has the power to hand out. Botania takes mana
+     * without asking whether it came, so a pool that showed more than that would give it away for nothing.
+     */
+    private long availableMana() {
+        final long held = this.cachedMana();
+        if (held == 0) {
+            return 0;
+        }
+        try {
+            final double perOperation = Math.max(1.0, ManaKeyType.INSTANCE.getAmountPerOperation());
+            final double power = this.proxy.getEnergy().extractAEPower(held / perOperation, Actionable.SIMULATE,
+                    PowerMultiplier.CONFIG);
+            return Math.min(held, (long) (power * perOperation + 0.9));
+        } catch (final GridAccessException e) {
+            return 0;
+        }
     }
 
     @Override
