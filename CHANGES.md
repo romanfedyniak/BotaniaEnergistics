@@ -8,6 +8,11 @@ All notable Botania Energistics changes are grouped by the version in which they
   Extended Life.
 - Back up the world before installing or updating the mod.
 
+## Unreleased
+
+- The Fluix Mana Pool shows only the mana the network has the power to hand out. Botania takes mana without
+  asking whether it came, so a pool short of power gave infusions and charging away for nothing.
+
 ## 1.0.0 - 2026-10-24
 
 - **Requires AE2UD 1.6.0 or newer.** AE2UD shares its mod id with AE2 and AE2 UEL, so the version range is
