@@ -10,6 +10,8 @@ All notable Botania Energistics changes are grouped by the version in which they
 
 ## Unreleased
 
+- **Requires AE2UD 1.6.0 or newer.** AE2UD shares its mod id with AE2 and AE2 UEL, so the version range is
+  what keeps the game from starting with either of them in its place.
 - **The mod loads next to AE2UD and Botania r1.10-364.** It adds nothing yet.
 - **Mana is a kind of content an ME network holds.** It is registered with AE2UD the way fluids are, so the
   terminals list it, the key-type picker offers it and it is drawn as the surface of a mana pool. A byte of a
