@@ -11,6 +11,7 @@ import net.minecraft.util.text.TextComponentString;
 
 import appeng.api.config.Actionable;
 import appeng.api.networking.security.IActionSource;
+import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.stacks.KeyCounter;
@@ -92,6 +93,11 @@ public final class CreativeManaCell implements StorageCell, IStorageSink {
         @Override
         public boolean isCell(final ItemStack is) {
             return !is.isEmpty() && is.getItem() == BotaEngItems.CREATIVE_MANA_CELL;
+        }
+
+        @Override
+        public boolean isCell(final AEItemKey key) {
+            return key.getItem() == BotaEngItems.CREATIVE_MANA_CELL;
         }
 
         @Nullable
