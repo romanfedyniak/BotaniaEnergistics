@@ -75,7 +75,8 @@ public final class CreativeManaCell implements StorageCell, IStorageSink {
 
     @Override
     public boolean canFitInsideCell() {
-        return false;
+        // Holds nothing of its own: stored in another cell, it loses nothing
+        return true;
     }
 
     @Override
