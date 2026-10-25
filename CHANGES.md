@@ -8,8 +8,13 @@ All notable Botania Energistics changes are grouped by the version in which they
   Extended Life.
 - Back up the world before installing or updating the mod.
 
-## Unreleased
+## 1.0.1 - 2026-10-25
 
+- The creative mana cell can be stored inside another storage cell. It holds nothing of its own, so nothing
+  is lost.
+- A storage cell's check whether an item is a creative mana cell no longer builds a stack for every item the
+  network moves.
+- A player's wireless terminals are found once and kept between searches for as long as they still answer.
 - The Fluix Mana Pool shows only the mana the network has the power to hand out. Botania takes mana without
   asking whether it came, so a pool short of power gave infusions and charging away for nothing.
 
