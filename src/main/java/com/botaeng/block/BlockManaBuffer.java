@@ -1,5 +1,8 @@
 package com.botaeng.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
@@ -7,7 +10,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -63,6 +65,9 @@ public class BlockManaBuffer extends Block implements ILexiconable {
     public boolean onBlockActivated(final World world, final BlockPos pos, final IBlockState state,
             final EntityPlayer player, final EnumHand hand, final EnumFacing facing, final float hitX,
             final float hitY, final float hitZ) {
+        if (WrenchDismantling.tryDismantle(this, world, pos, state, player, hand)) {
+            return true;
+        }
         if (!world.isRemote) {
             player.openGui(BotaEng.INSTANCE, BotaEngGuiHandler.MANA_BUFFER, world, pos.getX(), pos.getY(),
                     pos.getZ());
@@ -76,9 +81,11 @@ public class BlockManaBuffer extends Block implements ILexiconable {
         final TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileManaBuffer) {
             final IItemHandler items = ((TileManaBuffer) tile).getItems();
+            final List<ItemStack> drops = new ArrayList<>();
             for (int slot = 0; slot < items.getSlots(); slot++) {
-                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), items.getStackInSlot(slot));
+                drops.add(items.getStackInSlot(slot));
             }
+            WrenchDismantling.drop(world, pos, drops);
         }
         super.breakBlock(world, pos, state);
     }

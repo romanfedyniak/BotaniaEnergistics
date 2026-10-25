@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
@@ -104,6 +105,13 @@ public class BlockFluixManaPool extends Block implements IWandHUD, IWandable, IL
         }
         final IPart center = ((IPartHost) tile).getPart(AEPartLocation.INTERNAL);
         return center instanceof IPartCable && ((IPartCable) center).isConnected(side.getOpposite());
+    }
+
+    @Override
+    public boolean onBlockActivated(final World world, final BlockPos pos, final IBlockState state,
+            final EntityPlayer player, final EnumHand hand, final EnumFacing facing, final float hitX,
+            final float hitY, final float hitZ) {
+        return WrenchDismantling.tryDismantle(this, world, pos, state, player, hand);
     }
 
     @Override

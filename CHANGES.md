@@ -8,6 +8,11 @@ All notable Botania Energistics changes are grouped by the version in which they
   Extended Life.
 - Back up the world before installing or updating the mod.
 
+## Unreleased
+
+- **A wrench takes the Fluix Mana Pool and the Mana Buffer into the inventory**, the buffer with what it held, as
+  it does AE2UD's own blocks; whatever does not fit lands at the player's feet.
+
 ## 1.0.1 - 2026-10-25
 
 - The creative mana cell can be stored inside another storage cell. It holds nothing of its own, so nothing
