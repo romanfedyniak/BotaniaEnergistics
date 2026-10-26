@@ -8,7 +8,7 @@ All notable Botania Energistics changes are grouped by the version in which they
   Extended Life.
 - Back up the world before installing or updating the mod.
 
-## Unreleased
+## 1.0.2 - 2026-10-26
 
 - **A wrench takes the Fluix Mana Pool and the Mana Buffer into the inventory**, the buffer with what it held, as
   it does AE2UD's own blocks; whatever does not fit lands at the player's feet.
